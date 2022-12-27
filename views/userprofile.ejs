@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Edit Profile</title>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link type="text/css" rel="stylesheet" href="../css/index.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	
+</head>
+<body>
+	 <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+	  <a class="navbar-brand" href="/">PennBook</a>
+	  <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/feed">Feed</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/wall">Wall</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/viewfriends">Friends</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/allusers">All Users</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/visual">Visualizer</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/chatInvite">Chat</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/userprofile">Profile</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	  </ul>
+	</nav>
+	
+	<div class="container">
+	  	<%if (error != null) { %>
+				<div class="card text-white bg-danger mb-3 mt-3">
+				  <div class="card-body">
+				    <h5 class="card-title">Uh Oh!</h5>
+				    <p class="card-text"><%= error %></p>
+				  </div>
+				</div>
+			<% } %>
+	  	<div class="card mt-3 mx-auto mb-4">
+		  		<div class="card-header text-center">
+			   	 	<h1>Your Profile</h1>
+			  	</div>
+			  <div class="card-body">
+			    <p class="card-text text-center">Make changes to your profile here:</p>
+			    <form action="/editprofile" method="post">
+				  <div class="row g-3">
+					  <div class="form-group col">
+					    <label for="first_name">First Name:</label>
+					    <input type="text" class="form-control" id="first_name" name="first_name" value="<%= userdata.first_name.S%>" disabled>
+					  </div>
+					  <div class="form-group col">
+					    <label for="last_name">Last Name:</label>
+					    <input type="text" class="form-control" id="last_name" name="last_name" value="<%= userdata.last_name.S%>" disabled>
+					  </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="affiliation">Affiliation:</label>
+				    <input type="text" class="form-control" id="affiliation" name="affiliation" value="<%= userdata.affiliation.S %>" placeholder="Enter Affiliation">
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="email_address">Email Address:</label>
+				    <input type="email" class="form-control" id="email_address" name="email_address" value="<%= userdata.email_address.S%>" placeholder="Enter Email">
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="birthday">Birthday:</label>
+				    <input type="date" class="form-control" id="birthday" name="birthday" value="<%= userdata.birthday.S%>" disabled>
+				  </div>
+				 
+				<h5 class="text-center mt-2">Select at least 2 interests:</h5>
+				<div class="row mb-2">
+					<div class="col">
+						<div class="form-check">
+						  <input class="form-check-input" name="sports_check" type="checkbox" value="" id="sports_check">
+						  <label class="form-check-label" for="sports_check">
+						    Sports
+						  </label>
+						</div>
+						<div class="form-check">
+						  <input class="form-check-input" name="travel_check" type="checkbox" value="" id="travel_check">
+						  <label class="form-check-label" for="travel_check">
+						    Travel
+						  </label>
+						</div>
+						<div class="form-check">
+						  <input class="form-check-input" name="wellness_check" type="checkbox" value="" id="wellness_check">
+						  <label class="form-check-label" for="wellness_check">
+						    Wellness
+						  </label>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-check">
+						  <input class="form-check-input" name="business_check" type="checkbox" value="" id="business_check">
+						  <label class="form-check-label" for="business_check">
+						   Business
+						  </label>
+						</div>
+						<div class="form-check">
+						  <input class="form-check-input" name="entertainment_check" type="checkbox" value="" id="entertainment_check">
+						  <label class="form-check-label" for="entertainment_check">
+						    Entertainment
+						  </label>
+						</div>
+						<div class="form-check">
+						  <input class="form-check-input" name="politics_check" type="checkbox" value="" id="politics_check">
+						  <label class="form-check-label" for="politics_check">
+						    Politics
+						  </label>
+						</div>
+					</div>
+				  </div>
+				  
+				   <div class="form-group">
+				    <label for="username">Username:</label>
+				    <input type="text" class="form-control" id="username" name="username" value="<%= userdata.username.S%>" placeholder="Enter Username" disabled>
+				  </div>
+				  <div class="form-group">
+				    <label for="password">Change Password:</label>
+				    <input type="password" class="form-control" id="password" name="password" value="" placeholder="New Password">
+				  </div>
+				  
+				  <div class="text-center">
+				  	<button type="submit" id="updateBtn" class="btn btn-primary mt-3">Update</button>
+				  </div>
+				  </form>
+				  
+			  </div>
+			</div>
+			<!--  Attempted delete account modal 
+			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledly="deleteModal" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-header">
+					  <h1 class="modal-title fs-5" id="modalLabel">Are you sure you want to delete your account?</h1>
+					  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+					  Deleting your account is permanent. Your profile, posts, and followers will be deleted forever.				  	
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modala">Cancel</button>
+					  <button type="button" class="btn btn-danger">Yes, I want to delete</button>
+					</div>
+				  </div>
+				</div>
+				
+				<form action="/deleteaccount" method="post">
+				  <div class="text-center">
+				    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="deleteModal">
+  						Delete account
+					</button>
+				  </div>
+				  </form>
+			-->
+  	</div>
+  	
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>  	
+  	</div>
+  	
+	<script>
+		var currAff = "<%= userdata.affiliation.S %>";
+		console.log(currAff);
+		//$(document).ready(function() {
+		//	document.getElementById("updateBtn").addEventListener("submit", function() {
+		//		var newVal = document.getElementById('affiliation').value;
+		//		if (currAff == newVal) {
+		//			console.log("Here it's the same");
+		//		}
+		//		console.log("Here is the new aff: " + newVal);
+		//		document.getElementById('testbox').replace('testStr', 'TESTINGTESTING');
+		//	});
+		//});
+		
+	</script>
+
+
+  	<script>
+  	 var newsInt = "<%= userdata.news_interests.SS %>";
+  	// console.log("TESTING PRINTING CONSOLE, here is news int " + newsInt);
+  	// checks off the check boxes that the users already has selected
+  		$(document).ready(function() {
+			if (newsInt.includes("Politics")) {
+				document.getElementById('politics_check').checked = true;
+			}
+			if (newsInt.includes("Sports")) {
+				document.getElementById('sports_check').checked = true;
+			} 
+			if (newsInt.includes("Entertainment")) {
+				document.getElementById('entertainment_check').checked = true;
+			} 
+			if (newsInt.includes("Wellness")) {
+				document.getElementById('wellness_check').checked = true;
+			} 
+			if (newsInt.includes("Travel")) {
+				document.getElementById('travel_check').checked = true;
+			} 
+			if (newsInt.includes("Business")) {
+				document.getElementById('business_check').checked = true;
+			} 
+  		});
+  		
+  		
+  		
+  	</script>
+  	
+  
+</body>
+
+
+</html>
+

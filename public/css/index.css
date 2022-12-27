@@ -1,0 +1,98 @@
+:root {
+	--newBlue: #839ec3; 
+	--newBlueHighlight: #bfcde0;
+	--navBarCol: #536379; /* #4E414A; */ 
+	--dangerRed: #ed4545;
+	--dangerRedHighlight: #EE5858;
+	--newGreen: #5a8776;
+	--newPink: #b06d7f;
+	--brighterBlue: #496A97;
+	--newPinkHightlight: #c695a2;
+}
+
+body {
+	font-family: 'Roboto Mono', sans-serif;
+	/*background-color: #F6F5F3;*/
+	color: #0F1A20; 
+}
+
+.btn-primary {
+	background-color: var(--newBlue);
+	border: var(--newBlue);
+}
+
+.btn-primary:hover {
+	background-color: var(--newBlueHighlight);
+}
+
+.btn-danger {
+	background-color: var(--dangerRed);
+	border: var(--dangerRed);
+}
+
+.btn-danger:hover {
+	background-color: var(--dangerRedHighlight);
+}
+
+.btn-danger-outline {
+	border: var(--dangerRed);
+	color: var(--dangerRed);
+}
+
+.btn-danger-outline:hover {
+	background-color: var(--dangerRedHighlight);
+}
+
+a, .btn-link {
+	color: var(--brighterBlue);
+}
+
+a:hover, .btn-link:hover {
+	color: var(--newPink);
+}
+
+.navbar {
+    background-color: var(--navBarCol);
+}
+
+.form-group {
+	margin-bottom: 0.5em;
+}
+
+.tag-green {
+	background-color: #6E9887;
+}
+.tag-tan {
+	background-color: #D4B483;
+}
+.tag-teal {
+	background-color: #78E0DC;
+}
+.tag-pink {
+	background-color: #D496A7;
+}
+.tag-blue {
+	background-color: #275DAD;
+}
+.tag-purple {
+	background-color: #F90093;
+}
+
+.text-success {
+	color: var(--newGreen);
+}
+
+.btn-outline-success {
+	color: var(--newGreen);
+	border-color: var(--newGreen);
+}
+
+.btn-pink {
+	background-color: var(--newPink);
+	color: white;
+}
+
+.btn-pink:hover {
+	background-color: var(--newPinkHighlight);
+}
+

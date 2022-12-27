@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Post To <%=wall_username%>'s Wall</title>
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link type="text/css" rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+	  <a class="navbar-brand" href="/">PennBook</a>
+	  <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/feed">Feed</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/wall">Wall</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/viewfriends">Friends</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/allusers">All Users</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/visual">Visualizer</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/chatInvite">Chat</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/userprofile">Profile</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	  </ul>
+	</nav>
+
+    <!-- ADD POST CARD -->
+    <div class="container">
+        <div class="card-header text-center mt-2">
+            <h1>Add a Post to <%=wall_username%>'s Wall</h1>
+        </div>
+        <div class="card mt-3 mx-auto">
+            <div class="card-footer bg-white">
+	            <form action="/addPostToOtherWall" method="post">
+					<div class="input-group">
+						<textarea class="form-control" id="content" name="content" aria-label="With textarea"></textarea>
+                        <input type="hidden" class="form-control" id="wall_username" name="wall_username" value="<%=wall_username%>">
+                        <div class="col text-center">
+                            <button class="btn btn-outline-success w-20 p-4 text-dark">Add a Post to <%=wall_username%>'s Wall</button>
+                        </div>
+                    </div>
+				</form>
+            </div>
+            <div class="card-footer bg-light">
+                <div class="text-center">
+                    <form action="/wall" method="get">
+                        <button class="btn btn-outline-danger w-50 text-dark">Return</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

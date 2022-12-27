@@ -1,0 +1,55 @@
+Full names:  Marissa Almonte, Lyndsey Barrett, Cassandra Horwege, James Kearney 
+SEAS logins: marsalm, lyndseyb, chorwege, jameskea
+		
+Which features did you implement? 
+- User Login, Signup, Account Modifications: ***
+- Friending other users, searching for other users: ****
+- News Feed: User news recommendations based on chosen interests, users can like articles
+- Chat Function + Invites: A user can enter a chat with another active user, chats are saved in the database such that there is persitence (as well as ordering), group chats are possible, users can go back to previous chats, and additionally add users to existing chats (as well as leave hats and deny chat invitations).
+- Visualizer: ****
+- Security: Users cannot delete posts or comments that they did not make. Users must sign in to access content
+- 
+
+Which milestone(s) are you submitting? (Please check only one!)
+  [X] Final Project
+
+Did you complete any extra-credit tasks? If so, which ones?
+- Fancy Chat Invites: **
+- Persistent Chat Functionality: 
+- ***
+  
+
+Did you personally write _all_ the code you are submitting
+(other than code from the course web page)?
+  [X] Yes
+  [ ] No
+ 
+Did you copy any code from the Internet, or from classmates?
+  [ ] Yes
+  [X] No
+
+Did you collaborate with anyone on this assignment?
+  [ ] Yes
+  [X] No
+
+
+List of Source Files: ***
+- app.js **** this is the primary app file.
+- Compute Ranks: This is run to create the news recommendations, included in the news_functions folder
+
+
+Instructions for Running Project:
+In order to run the project: *****
+1. Locally
+- Make sure credentials are loaded
+[default]
+aws_access_key_id=AKIARHRT3WSH5J6NEJOY
+aws_secret_access_key=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
+- Run 'npm start' and access the website at http://localhost:80
+2. On AWS erver 
+- Make sure credentials are loaded
+- Run ssh -i ~/.ec2/login.pem ec2-user@44.211.46.46
+- Run npm start
+- Access website at http://44.211.46.46/
+
+

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=user%>'s Wall</title>
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link type="text/css" rel="stylesheet" href="../css/index.css">
+</head>
+<body class="mb-4">
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+	  <a class="navbar-brand" href="/">PennBook</a>
+	  <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/feed">Feed</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/wall">Wall</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/viewfriends">Friends</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/allusers">All Users</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/visual">Visualizer</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/chatInvite">Chat</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/userprofile">Profile</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	  </ul>
+	</nav>
+
+    <!-- POST CARDS -->
+    <div class="container">
+    
+    <div class="row"> 
+      	<h1 class="mt-2">Your Wall</h1>
+	    <p>Here you can view your posts and your friends posts.</p>
+    </div>
+    
+    <form action="/getAddPost" method="get">
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary text-white w-100 p-4"><h5>Add Post</h5></button>
+            </div>
+   </form>
+    <!--  
+=======
+    <!-- <p>HERE are the results: <%= results %></p> -->
+        <% results.forEach(function(post) { %>
+            <div class="card mt-3 mx-auto border-secondary">
+                <div class="card-header text-left bg-light">
+	                <div class="row">
+	                  <div class="col">
+	                   <form action="/friendsProfiles" method="get">
+							<input type="hidden" class="form-control" id="user" name="user" value="<%= post.creator_username.S%>">
+							<div>
+								<button type="submit" class="btn btn-link text-decoration-none"><%= post.creator_username.S%><span class="text-secondary">
+									posted
+									<% if (post.wall_username != null && post.creator_username.S != post.wall_username.S) { %>
+										on <%= post.wall_username.S%>'s wall
+									<% } %>
+								</span></button>
+							</div>
+						</form>
+					   </div>
+	                   <% if (post.creator_username.S == user) { %>
+		                   <div class="col text-end"><form action="/deletePost" method="post">
+		                        <button id="deleteBtn" name="deleteBtn" class="btn btn-outline-danger" value = "<%= post.inxid.N %>">Delete Post</button>
+							</form></div>
+					   <% } %>
+					</div>
+                </div>
+                <div class="card-body bg-white">
+                    <p class="card-text text-left"><h5><%= post.content.S %></h5></p>
+                </div>
+                
+                <!-- comment section -->
+                <div class="card-footer bg-light">
+	                <div class="card border-white">
+	                    <div class="card-header text-left bg-light border-light">
+	                        <a class="text-secondary text-decoration-none"><h6>Comments</h6></a>
+	                    </div>     
+	                    <% post.comments.L.forEach(function(comment) { %>
+							<%if (comment.L[0] && comment.L[1]) { %>
+								<div class="card border-white">
+									<div class="card text-dark border-white">
+										<div class="row">
+											<div class="col text-left">
+												<h6>
+													<form action="/friendsProfiles" method="post">
+														<input type="hidden" class="form-control" id="user" name="user" value="<%= comment.L[0].S %>">
+														<div>
+															<button type="submit" class="btn btn-link text-decoration-none"><%= comment.L[0].S %><span class="text-secondary"> commented</span></button>
+														</div>
+													</form>
+													<i class='text-success fas fa-angle-double-right'></i>
+													<%= comment.L[1].S %>
+												</h6>
+											</div>
+											<%if (comment.L[0].S === user) { %>
+												<div class="col text-end">
+													<form action="/deleteComment" method="post">
+														<button id="delCom" name="delCom" value ="<%= comment.L[1].S%>"  class="btn btn-outline-danger text-danger">Delete Comment</button>
+														<input id="id" name="id" value="<%=post.inxid.N%>" type="hidden"></input>
+													</form>
+												</div>
+											<% } %>
+										</div>
+									</div>
+								</div>
+							<% } %> 
+	                    <% }) %>
+	                </div>
+	                <div class="card-footer bg-white">
+		                <form action="/addComment" method="post">
+						    <div class="input-group">
+							    <textarea class="form-control" id="text" name="text" aria-label="With textarea"></textarea>
+							</div>
+	                        <div class="col text-center">
+	                            <button id="inxid" name="inxid" value = "<%= post.inxid.N %>" class="btn btn-outline-success text-white bg-success">Add Comment</button>
+	                        </div>
+						</form>
+	                </div>
+	                
+                </div>
+            </div>
+        <% }) %> 
+
+        <!-- ADD POST BUTTON -->
+        
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  	<script>
+		var reloadTimer = setInterval(refreshWall, 5000); // set the timer for 5 s
+	
+		function refreshWall() { // reload the page every 5 seconds
+			$.get("/wall", function(data) {
+				console.log("Wall is up to date");
+			});
+		}
+	</script>
+</body>
+</html>

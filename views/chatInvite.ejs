@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=user%>'s Chats</title>
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link type="text/css" rel="stylesheet" href="../css/index.css">
+    <style>
+		.table-group {
+			padding-left: 100px;
+			padding-right: 100px;
+		}
+	</style>
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+	  <a class="navbar-brand" href="/">PennBook</a>
+	  <ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="/feed">Feed</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/wall">Wall</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/viewfriends">Friends</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/allusers">All Users</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/visual">Visualizer</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/chatInvite">Chat</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/userprofile">Profile</a></li>
+	  	<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+	  </ul>
+	</nav>
+	
+	
+  	<div class="container">
+  		<%if (error != null) { %>
+			<div class="card text-white bg-danger mb-3 mt-3">
+			  <div class="card-body">
+			    <h5 class="card-title">Uh Oh!</h5>
+			    <p class="card-text"><%= error %></p>
+			  </div>
+			</div>
+		<% } %>
+  		<div class="row">
+  			<h1 class="text-center mt-3 text-success">Chats</h1>
+  		</div>
+  		<div class="row">
+  			<div class="col-8">
+	  			<div class="container">
+					<h4 class="text-center mt-3">Chat Invites</h4>
+					<p class="text-center mt-3">Below is a list of current chat invites from your PennBook friends!</p>
+					<div class = "table-responsive">
+						<table class="table table-sm table-striped">
+							<thead>
+								<tr>
+									<th>Room #</th>
+									<th>Accept</th>
+									<th>Reject</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% invites.sort().reverse()%>
+								<%for (let i = 0; i < invites.length; i++) {%>
+									<% console.log(invites[i]) %>
+									<tr>
+										<% if (invites[i] != 0) {%>
+											<td><%= invites[i]%></td>
+											
+								  			<td>
+											<form action="/joinChat" method="post">
+												  <input type="hidden" class="form-control" id="room_id" name="room_id" value="<%= invites[i]%>">
+									              <div>
+													 <button type="submit" class="btn btn-outline-success">Accept</button>
+												  </div>
+											</form>
+											</td>
+											<td>
+											<form action="/reject" method="post">
+												  <input type="hidden" class="form-control" id="room_id" name="room_id" value="<%= invites[i]%>">
+									              <div>
+													 <button type="submit" class="btn btn-outline-danger">Reject</button>
+												  </div>
+											</form>
+											</td>
+										<%}%>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+			  	</div>
+  			</div>
+  			<div class="col">
+  				<div class="container">
+  					<h4 class="text-center mt-3">Start a Chat</h4>
+  					<p class="text-center mt-3">Invite an active friend to chat</p>
+					<form action="/invite" method="post">
+						<input type="text" class="form-control" id="invite" name="invite" placeholder="@username">
+						<div class="text-center">
+							<button class="btn btn-outline-success">Chat</button>
+						</div>
+					</form>
+  				</div>
+			</div>
+  		</div>
+  		<div class= "row">
+  		<div class="col">
+  				<div class="container">
+  					<h4 class="text-center mt-3">Previous Chats</h4>
+					<p class="text-center mt-3">Below is a list of current chat from your PennBook friends!</p>
+					<div class = "table-responsive">
+						<table class="table table-sm table-striped">
+							<thead>
+								<tr>
+									<th>Room #</th>
+									<th>Join Chat</th>
+									<th>Delete Chat</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% ongoing.sort().reverse()%>
+								<%for (let i = 0; i < ongoing.length; i++) {%>
+									<% console.log(ongoing[i]) %>
+									<tr>
+										<% if (ongoing[i] != 0) {%>
+											<td><%= ongoing[i]%></td>
+											
+								  			<td>
+											<form action="/joinChat" method="post">
+												  <input type="hidden" class="form-control" id="room_id" name="room_id" value="<%= ongoing[i]%>">
+									              <div>
+													 <button type="submit" class="btn btn-outline-success">Accept</button>
+												  </div>
+											</form>
+											</td>
+											<td>
+											<form action="/remove" method="post">
+												  <input type="hidden" class="form-control" id="room_id" name="room_id" value="<%= ongoing[i]%>">
+									              <div>
+													 <button type="submit" class="btn btn-outline-danger">Delete</button>
+												  </div>
+											</form>
+											</td>
+										<%}%>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+  				</div>
+			</div>
+  		</div>
+  	</div>
+  		
+  		
+</body>
