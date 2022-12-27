@@ -42,9 +42,6 @@ Instructions for Running Project:
 In order to run the project: *****
 1. Locally
 - Make sure credentials are loaded
-[default]
-aws_access_key_id=AKIARHRT3WSH5J6NEJOY
-aws_secret_access_key=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
 - Run 'npm start' and access the website at http://localhost:80
 2. On AWS erver 
 - Make sure credentials are loaded
