@@ -1,0 +1,37 @@
+NETS2120 Final Project Report
+Team G14
+Marissa Almonte, Lyndsey Barrett, Cassandra Horwege, James Kearney
+
+Overview of system
+
+The core components of our PennBook are user login, signup, news homepage, friends’ posts, and a chat function. The home page has news articles that are recommended based on the user’s news interests and ranked based on the page rank algorithm. The user wall contains status updates, a user’s friends’ posts to their wall, and posts about the user themselves. There is also a page for users to view and search for other PennBook users, add and remove friends, and to initiate chats with active friends. Users are also able to accept or decline chat invites, and add users to a group chat. Chats are persistent and dynamic. Users can join previous chats or delete themselves from previous chats. Another feature of our PennBook is the visualizer, which is a tool that allows the user to view their network of friends on the site. If they click on a friend’s name, the network expands and shows the friends of the user that was clicked and other users with the same affiliation. 
+
+These components interact with each other by allowing a user to access social networking features on logging or creating their account. All key elements are accessible in the navbar: social networking feed, walls, and the visualizer, as well as chatting functionality and user profile editing. Each component is located on its own respective page.
+
+Team Work Distribution
+
+Cassie implemented much of the front-end styling and streamlined the designs across pages. For back-end components, she implemented the user sign up with interest selection. Additionally, she implemented the user status component, modifying the database to include user statuses, updating user status, and the functionality to display if a user is active or not. The page that lists all users has a search function that displays live suggestions as the user types, and the home page has a news search functionality, both of which she created, in addition with the news recommendations on the home page.
+
+Jake did frontend work on the wall, posts, and comments. Additionally, he built backend components that allowed for posts to be displayed on users wall, feed, and profiles. Jake built the chat persistence backend features, chat ordering, and the chat frontend feature. 
+
+Lyndsey did work on posts, comments, chat, and chat invite components. She focused on the back-end for adding/deleting posts and comments, and the back-end of the chat invites page. She did the front-end development for the chat messenger, chat invites, and friend’s profile pages. 
+
+Marissa implemented the back-end components for creating new accounts, updating user profiles, adding and removing a friend, and liking news articles. She implemented the front-end and back-end of the visualizer tool which queries the database for the users’ friends and scans for users with the same affiliation. The friend’s and wall page is implemented to refresh the page every ten seconds. 
+Technical Component Description
+
+Our database layout was structured in the following manner: Each user had their own row in a users table with the username being the primary key, which allowed for us to easily access information about the user, including the users wall and chats. The posts were stored in a separate table with the primary key being an id number. The id number allowed us to find posts easily when loading a user’s wall. Chats were also kept in a separate table with the chat_id being the primary key. This made it very easy to query chats after getting the chat_id of the user table. The chat invite page allowed for organization of all of the user’s ongoing chats and chat invites. The data for this page was stored in the user table under two columns:  ongoing_chats and chat_invites.
+
+If a user is inactive for 6 hours, then they are logged out and unable to chat with friends. News recommendations are based on user interests and adsorption with the user’s social network. News search finds articles from the news database based on the user's interests. We structured the news database to have the category as the primary key and a unique id number as the secondary key, which allowed for more efficient querying of news articles. 
+
+Discussion of Non-Trivial Design Decisions
+
+News recommendations are based on users’ interests, friends, and the current date. The chat messages persist by querying the database each time a user enters a chat, from there all chats are then handled by socket.io to send data between all users in the room.
+
+Discussion of Changes
+
+As we progressed, we had to make several changes to our database layout, including adding more columns to our users table. These columns helped us keep track of the chats the users were a part of. Furthermore, we changed the types of the data in some of our columns. For example, we changed a majority of our data that was kept originally as a list to a set because we found sets were more compatible to the work we were doing. 
+
+
+Extra-Credit Features
+
+Our team implemented chat persistence and a fancy chat invite page.
